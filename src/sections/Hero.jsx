@@ -68,11 +68,22 @@ const Hero = () => {
               code.
             </p>
 
-            <Button
+            {/* <Button
               text="explore my work"
               className="md:w-80 md:h-16 w-60 h-12"
               id="counter"
-            />
+            /> */}
+
+
+            <Button
+  text="explore my work"
+  className="md:w-80 md:h-16 w-60 h-12"
+  id="counter"
+  onClick={() => {
+    document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+  }}
+/>
+
           </div>
         </header>
 

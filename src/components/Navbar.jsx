@@ -1,6 +1,26 @@
 import { useState, useEffect } from "react";
 
-import { navLinks } from "../constants";
+
+
+
+const navLinks = [
+  {
+    name: "Work",
+    link: "#work",
+  },
+  {
+    name: "Projects",
+    link: "#experience",
+  },
+  {
+    name: "Skills",
+    link: "#skills",
+  },
+  {
+    name: "Education",
+    link: "#testimonials",
+  },
+];
 
 const Navbar = () => {
   // track if the user has scrolled down the page
