@@ -4,8 +4,9 @@ import ContactExperience from "../components/models/contact/ContactExperience";
 
 const Contact = () => {
   const formRef = useRef(null);
+  const messageRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,14 +23,14 @@ const Contact = () => {
     setLoading(true);
     // Simulate loading for UX
     setTimeout(() => {
-      setShowPopup(true);
+      setShowMessage(true);
       setLoading(false);
       setForm({ name: "", email: "", message: "" });
+      // Scroll to message section
+      if (messageRef.current) {
+        messageRef.current.scrollIntoView({ behavior: "smooth" });
+      }
     }, 1000);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
   };
 
   return (
@@ -100,38 +101,32 @@ const Contact = () => {
               </form>
             </div>
           </div>
-          <div className="xl:col-span-7 min-h-96">
+          <div className="xl:col-span-7 min-h-96 contact-3d-container">
             <div className="bg-[#cd7c2e] w-full h-full hover:cursor-grab rounded-3xl overflow-hidden">
               <ContactExperience />
             </div>
           </div>
         </div>
-      </div>
-
-      {showPopup && (
-        <div className="simple-popup">
-          <div className="simple-popup-content">
-            <button className="simple-popup-close" onClick={closePopup}>
-              ✕
-            </button>
-            <h2 className="simple-popup-title">
+        {showMessage && (
+          <div ref={messageRef} className="contact-message">
+            <h2 className="contact-message-title">
               Haha, this doesn't work!
             </h2>
-            <p className="simple-popup-message">
+            <p className="contact-message-text">
               But I can make you a custom component if you hire me! 😎
             </p>
-            <div className="simple-popup-socials">
+            <div className="contact-message-socials">
               <a
                 href="https://www.linkedin.com/in/dhawalshinde"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="simple-popup-link"
+                className="contact-message-link"
               >
                 LinkedIn
               </a>
               <a
                 href="mailto:dhawalshinde14@gmail.com"
-                className="simple-popup-link"
+                className="contact-message-link"
               >
                 Email: dhawalshinde14@gmail.com
               </a>
@@ -139,22 +134,22 @@ const Contact = () => {
                 href="https://github.com/dh4wall"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="simple-popup-link"
+                className="contact-message-link"
               >
                 GitHub
               </a>
               <a
-                href="https://x.com/dhawal_shinde"
+                href="https://x.com/Dhaw4l"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="simple-popup-link"
+                className="contact-message-link"
               >
                 Twitter
               </a>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };
