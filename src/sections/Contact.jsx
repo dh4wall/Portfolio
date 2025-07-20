@@ -1,12 +1,11 @@
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/models/contact/ContactExperience";
 
 const Contact = () => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,25 +17,19 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading state
-
-    try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      );
-
-      // Reset form and stop loading
+    setLoading(true);
+    // Simulate loading for UX
+    setTimeout(() => {
+      setShowPopup(true);
+      setLoading(false);
       setForm({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("EmailJS Error:", error); // Optional: show toast
-    } finally {
-      setLoading(false); // Always stop loading, even on error
-    }
+    }, 1000);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -114,6 +107,54 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="simple-popup">
+          <div className="simple-popup-content">
+            <button className="simple-popup-close" onClick={closePopup}>
+              ✕
+            </button>
+            <h2 className="simple-popup-title">
+              Haha, this doesn't work!
+            </h2>
+            <p className="simple-popup-message">
+              But I can make you a custom component if you hire me! 😎
+            </p>
+            <div className="simple-popup-socials">
+              <a
+                href="https://www.linkedin.com/in/dhawalshinde"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="simple-popup-link"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:dhawalshinde14@gmail.com"
+                className="simple-popup-link"
+              >
+                Email: dhawalshinde14@gmail.com
+              </a>
+              <a
+                href="https://github.com/dh4wall"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="simple-popup-link"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://x.com/dhawal_shinde"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="simple-popup-link"
+              >
+                Twitter
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
