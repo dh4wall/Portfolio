@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import TitleHeader from "../components/TitleHeader";
-import GlowCard from "../components/GlowCard";
+import GlowCard from "../components/GlowCard"; // Re-added
 
 export const projectCards = [
   {
@@ -11,55 +11,65 @@ export const projectCards = [
     date: "2024",
     imgPath: "/images/projectdetails/prepbuddyicon.png",
     description: "An AI-powered interview preparation platform with mock interviews and personalized feedback.",
-    githubLink: "https://github.com/username/prepbuddy",
-    images: [
-      "/images/prepbuddy_home.png",
-      "/images/prepbuddy_interview.png",
-    ],
+    githubLink: "https://github.com/dh4wall/prepbuddy",
+    liveLink: "https://prepbuddy.example.com",
+    videoPath: "/videos/PrepBuddy.mp4",
+    images: [],
+    techStack: ["ReactJS", "Node.js", "MongoDB"],
   },
   {
     title: "ScreenDrop",
     date: "2024",
     imgPath: "/images/screendrop_thumb.png",
     description: "A screen recording and sharing platform with cloud storage and easy sharing features.",
-    githubLink: "https://github.com/username/screendrop",
-    images: [
-      "/images/screendrop_record.png",
-      "/images/screendrop_dashboard.png",
-    ],
+    githubLink: "https://github.com/dh4wall/screendrop",
+    liveLink: "https://screendrop.example.com",
+    videoPath: "/videos/ScreenDrop.mp4",
+    images: [],
+    techStack: ["JavaScript", "Express.js", "AWS"],
   },
+  {
+    title: "PDF Extractor",
+    date: "2024",
+    imgPath: "/images/pdfextractor_thumb.png",
+    description: "A website to upload, extract data from invoices, edit them, and save the modified versions with ease.",
+    githubLink: "https://github.com/username/pdfextractor",
+    videoPath: "/videos/PDFextractor.mp4", // No video, will use GIF
+    images: [],
+    techStack: ["Python", "Flask", "PostgreSQL"],
+  },
+
+  {
+    title: "StockSage",
+    date: "2024",
+    imgPath: "/images/stock_thumb.png",
+    description: "An AI-driven stock market analysis tool providing insights and predictions.",
+    githubLink: "https://github.com/dh4wall/stock-sage",
+    videoPath: "/videos/Stocksage.mp4",
+    images: [],
+    techStack: ["JavaScript", "HTML", "CSS"],
+  },
+
   {
     title: "SudokuSolver",
     date: "2024",
     imgPath: "/images/sudoku_thumb.png",
     description: "An interactive Sudoku solver with step-by-step solutions using backtracking algorithms.",
     githubLink: "https://github.com/username/sudokusolver",
-    images: [
-      "/images/sudoku_input.png",
-      "/images/sudoku_solve.png",
-    ],
+    videoPath: "/videos/SudokuUniverse.mp4",
+    images: [],
+    techStack: ["JavaScript", "HTML", "CSS"],
   },
-  {
-    title: "DoodleHub",
-    date: "2024",
-    imgPath: "/images/doodle_thumb.png",
-    description: "A collaborative drawing app for real-time sketching with friends.",
-    githubLink: "https://github.com/username/doodlehub",
-    images: [
-      "/images/doodle_collab.png",
-      "/images/doodle_canvas.png",
-    ],
-  },
+  
   {
     title: "BrickBreaker",
     date: "2024",
     imgPath: "/images/brick_thumb.png",
     description: "A classic arcade-style brick breaker game built with JavaScript.",
     githubLink: "https://github.com/username/brickbreaker",
-    images: [
-      "/images/brick_gameplay.png",
-      "/images/brick_start.png",
-    ],
+    videoPath: null,
+    images: [],
+    techStack: ["JavaScript", "p5.js"],
   },
   {
     title: "Sprintify",
@@ -67,10 +77,9 @@ export const projectCards = [
     imgPath: "/images/sprintify_thumb.png",
     description: "A project management tool for agile teams with Kanban boards and task tracking.",
     githubLink: "https://github.com/username/sprintify",
-    images: [
-      "/images/sprintify_board.png",
-      "/images/sprintify_tasks.png",
-    ],
+    videoPath: null,
+    images: [],
+    techStack: ["Next.js", "Tailwind CSS", "Firebase"],
   },
   {
     title: "Portfolio Website",
@@ -78,10 +87,9 @@ export const projectCards = [
     imgPath: "/images/portfolio_thumb.png",
     description: "A personal portfolio website showcasing projects and skills.",
     githubLink: "https://github.com/username/portfolio",
-    images: [
-      "/images/portfolio_home.png",
-      "/images/portfolio_about.png",
-    ],
+    videoPath: null, // No video, will use GIF
+    images: [],
+    techStack: ["ReactJS", "GSAP", "Three.js"],
   },
 ];
 
@@ -89,51 +97,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
   useGSAP(() => {
-    gsap.utils.toArray(".timeline-card").forEach((card) => {
-      // Animate card sliding in from the left
-      gsap.from(card, {
-        xPercent: -100,
+    try {
+      console.log("GSAP Initializing...");
+      gsap.utils.toArray(".timeline-card").forEach((card) => {
+        gsap.from(card, {
+          xPercent: -50,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
+      gsap.from(".skills-section", {
         opacity: 0,
-        transformOrigin: "left left",
-        duration: 1,
-        ease: "power2.inOut",
+        yPercent: 30,
+        duration: 0.5,
+        ease: "power1.out",
         scrollTrigger: {
-          trigger: card,
-          start: "top 80%",
+          trigger: ".skills-section",
+          start: "top 90%",
           end: "bottom 20%",
           toggleActions: "play none none reverse",
         },
       });
-
-      // Animate expText sliding in from the right
-      const expText = card.querySelector(".expText");
-      gsap.from(expText, {
-        opacity: 0,
-        xPercent: 100,
-        duration: 1,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 60%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-
-    // Animate skills section
-    gsap.from(".skills-section", {
-      opacity: 0,
-      yPercent: 50,
-      duration: 1,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".skills-section",
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
-      },
-    });
+      console.log("GSAP Initialized Successfully");
+    } catch (error) {
+      console.error("GSAP Error:", error);
+    }
   }, []);
 
   return (
@@ -146,32 +142,78 @@ const Projects = () => {
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
             {projectCards.map((project) => (
-              <div key={project.title} className="exp-card-wrapper timeline-card">
-                <div className="xl:w-2/6">
-                  <h1 className="font-bold text-4xl xl:text-5xl">{project.title}</h1>
+              <div
+                key={project.title}
+                className="exp-card-wrapper timeline-card flex flex-col xl:flex-row gap-8"
+              >
+                <div className="xl:w-3/6">
+                  <div className={`video-container rounded-xl overflow-hidden shadow-lg border border-blue-300 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,128,255,0.7)] ${!project.videoPath ? 'w-96' : ''}`}>
+                    {project.videoPath ? (
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-auto"
+                        style={{ objectFit: "cover" }}
+                        onError={() => console.log("Video load failed:", project.videoPath)}
+                      >
+                        <source src={project.videoPath} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTlnaWlja2RlZXI5dWUyaTkwcXBsdGM1dmhpZngzdm10NDIxM2xtdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ggsPCNJznX7nX2RC6i/giphy.gif"
+                        alt={`${project.title} placeholder`}
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
                 </div>
-                <div className="xl:w-4/6">
-                  <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
+                <div className="xl:w-3/6">
+                  <h1 className="font-bold text-4xl xl:text-5xl mb-4 text-white">
+                    {project.title}
+                  </h1>
+                  {/* Links between title and card */}
+                  <div className="mb-4">
+                    {project.liveLink && (
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-50 underline hover:text-white mr-4 z-60"
+                        style={{ pointerEvents: "auto", position: "relative" }}
+                        onClick={() => console.log("Live link clicked:", project.liveLink)}
+                      >
+                        Live Demo
+                      </a>
+                    )}
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-50 underline hover:text-white z-60"
+                      style={{ pointerEvents: "auto", position: "relative" }}
+                      onClick={() => console.log("GitHub link clicked:", project.githubLink)}
+                    >
+                      View on GitHub
+                    </a>
+                  </div>
+                  <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-30">
                     <GlowCard card={project}>
-                      <div>
-                        <p className="my-5 text-white-50">🗓️ {project.date}</p>
-                        <p className="text-white-50 mb-5">{project.description}</p>
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-50 underline hover:text-white"
-                        >
-                          View on GitHub
-                        </a>
-                        <div className="flex flex-wrap gap-5 mt-5">
-                          {project.images.map((image, index) => (
-                            <img
+                      <div className="z-60">
+                        <p className="my-5 text-white-50">{project.description}</p>
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {project.techStack.map((tech, index) => (
+                            <span
                               key={index}
-                              src={image}
-                              alt={`${project.title}-${index}`}
-                              className="rounded-xl w-64 h-auto"
-                            />
+                              className="bg-blue-600 text-white-50 text-sm px-3 py-1 rounded-full shadow-[0_0_10px_rgba(0,128,255,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,128,255,0.7)] hover:bg-blue-500"
+                              style={{ boxShadow: "0 0 5px rgba(0, 128, 255, 0.5)" }} // Base glow
+                              onMouseEnter={(e) => (e.target.style.boxShadow = "0 0 15px rgba(0, 128, 255, 0.7)")}
+                              onMouseLeave={(e) => (e.target.style.boxShadow = "0 0 5px rgba(0, 128, 255, 0.5)")}
+                            >
+                              {tech}
+                            </span>
                           ))}
                         </div>
                       </div>
@@ -185,7 +227,7 @@ const Projects = () => {
         <div className="skills-section mt-32">
           <TitleHeader title="Technical Skills" sub="🛠️ My Toolbox" />
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mt-10">
-            <div className="skills-category">
+            <div className="skills-category shadow-[0_0_10px_rgba(0,128,255,0.3)] rounded-lg p-4">
               <h3 className="text-2xl font-semibold text-blue-50 mb-4">Languages</h3>
               <ul className="space-y-2">
                 <li className="skills-item bg-black-200 text-white-50">C++</li>
@@ -193,7 +235,7 @@ const Projects = () => {
                 <li className="skills-item bg-black-200 text-white-50">JavaScript/TypeScript</li>
               </ul>
             </div>
-            <div className="skills-category">
+            <div className="skills-category shadow-[0_0_10px_rgba(0,128,255,0.3)] rounded-lg p-4">
               <h3 className="text-2xl font-semibold text-blue-50 mb-4">Frontend</h3>
               <ul className="space-y-2">
                 <li className="skills-item bg-black-200 text-white-50">ReactJS</li>
@@ -203,7 +245,7 @@ const Projects = () => {
                 <li className="skills-item bg-black-200 text-white-50">threejs</li>
               </ul>
             </div>
-            <div className="skills-category">
+            <div className="skills-category shadow-[0_0_10px_rgba(0,128,255,0.3)] rounded-lg p-4">
               <h3 className="text-2xl font-semibold text-blue-50 mb-4">Backend</h3>
               <ul className="space-y-2">
                 <li className="skills-item bg-black-200 text-white-50">Express.js</li>
@@ -211,7 +253,7 @@ const Projects = () => {
                 <li className="skills-item bg-black-200 text-white-50">WebSockets</li>
               </ul>
             </div>
-            <div className="skills-category">
+            <div className="skills-category shadow-[0_0_10px_rgba(0,128,255,0.3)] rounded-lg p-4">
               <h3 className="text-2xl font-semibold text-blue-50 mb-4">Database</h3>
               <ul className="space-y-2">
                 <li className="skills-item bg-black-200 text-white-50">MongoDB</li>
@@ -222,7 +264,7 @@ const Projects = () => {
                 <li className="skills-item bg-black-200 text-white-50">Firebase Firestore</li>
               </ul>
             </div>
-            <div className="skills-category">
+            <div className="skills-category shadow-[0_0_10px_rgba(0,128,255,0.3)] rounded-lg p-4">
               <h3 className="text-2xl font-semibold text-blue-50 mb-4">Tools</h3>
               <ul className="space-y-2">
                 <li className="skills-item bg-black-200 text-white-50">Git</li>
