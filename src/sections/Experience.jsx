@@ -11,32 +11,33 @@ export const projectCards = [
     date: "2024",
     imgPath: "/images/projectdetails/prepbuddyicon.png",
     description: "An AI-powered interview preparation platform with mock interviews and personalized feedback.",
-    githubLink: "https://github.com/dh4wall/prepbuddy",
-    liveLink: "https://prepbuddy.example.com",
-    videoPath: "/videos/PrepBuddy.mp4",
+    githubLink: "https://github.com/dh4wall/PrepBuddy",
+    liveLink: "https://prep-buddy-seven.vercel.app/",
+    videoPath: "https://res.cloudinary.com/dro80pkoi/video/upload/v1757858600/PrepBuddy_hdrgpj.mp4",
     images: [],
-    techStack: ["ReactJS", "Node.js", "MongoDB"],
+    techStack: ["Nextjs", "Vapi", "Firebase"],
   },
   {
     title: "ScreenDrop",
     date: "2024",
     imgPath: "/images/screendrop_thumb.png",
     description: "A screen recording and sharing platform with cloud storage and easy sharing features.",
-    githubLink: "https://github.com/dh4wall/screendrop",
-    liveLink: "https://screendrop.example.com",
-    videoPath: "/videos/ScreenDrop.mp4",
+    githubLink: "https://github.com/dh4wall/ScreenDrop",
+    liveLink: "https://screendrop.onrender.com/",
+    videoPath: "https://res.cloudinary.com/dro80pkoi/video/upload/v1757858609/ScreenDrop_wwdz7h.mp4",
     images: [],
-    techStack: ["JavaScript", "Express.js", "AWS"],
+    techStack: ["Nextjs", "BunnyCDN", "Arcjet"],
   },
   {
     title: "PDF Extractor",
     date: "2024",
     imgPath: "/images/pdfextractor_thumb.png",
     description: "A website to upload, extract data from invoices, edit them, and save the modified versions with ease.",
-    githubLink: "https://github.com/username/pdfextractor",
-    videoPath: "/videos/PDFextractor.mp4", // No video, will use GIF
+    githubLink: "https://github.com/dh4wall/PDF-Extractor",
+    liveLink: "https://pdf-extractor-web-murex.vercel.app/",
+    videoPath: "https://res.cloudinary.com/dro80pkoi/video/upload/v1757858579/PDFextractor_egae7h.mp4", // No video, will use GIF
     images: [],
-    techStack: ["Python", "Flask", "PostgreSQL"],
+    techStack: ["Reactjs", "MongoDB", "Gemini AI" ],
   },
 
   {
@@ -44,32 +45,46 @@ export const projectCards = [
     date: "2024",
     imgPath: "/images/stock_thumb.png",
     description: "An AI-driven stock market analysis tool providing insights and predictions.",
-    githubLink: "https://github.com/dh4wall/stock-sage",
-    videoPath: "/videos/Stocksage.mp4",
+    githubLink: "https://github.com/dh4wall/StockSage",
+    liveLink: "https://stock-sage-mu.vercel.app/",
+    videoPath: "https://res.cloudinary.com/dro80pkoi/video/upload/v1757858598/Stocksage_e55x2w.mp4",
     images: [],
-    techStack: ["JavaScript", "HTML", "CSS"],
+    techStack: ["RE Charts", "PostgreSQL", "Gemini AI"],
   },
 
   {
-    title: "SudokuSolver",
+    title: "SudokuUniverse",
     date: "2024",
     imgPath: "/images/sudoku_thumb.png",
     description: "An interactive Sudoku solver with step-by-step solutions using backtracking algorithms.",
-    githubLink: "https://github.com/username/sudokusolver",
-    videoPath: "/videos/SudokuUniverse.mp4",
+    githubLink: "https://github.com/dh4wall/SudokuUniverse",
+    liveLink: "https://sudoku-universe.vercel.app/",
+    videoPath: "https://res.cloudinary.com/dro80pkoi/video/upload/v1757858589/SudokuUniverse_bq6np0.mp4",
     images: [],
-    techStack: ["JavaScript", "HTML", "CSS"],
+    techStack: ["React.js", "Express.js", "backtracking" ],
   },
   
+  {
+    title: "Portfolio Website",
+    date: "2024",
+    imgPath: "/images/portfolio_thumb.png",
+    description: "A personal portfolio website showcasing projects and skills.",
+    githubLink: "https://github.com/dh4wall/Portfolio",
+    liveLink: "https://dh4wall.vercel.app/",
+    videoPath: null, // No video, will use GIF
+    images: [],
+    techStack: ["ReactJS", "GSAP", "Three.js"],
+  },
+
   {
     title: "BrickBreaker",
     date: "2024",
     imgPath: "/images/brick_thumb.png",
     description: "A classic arcade-style brick breaker game built with JavaScript.",
-    githubLink: "https://github.com/username/brickbreaker",
+    githubLink: "https://github.com/dh4wall/brick-breaker",
     videoPath: null,
     images: [],
-    techStack: ["JavaScript", "p5.js"],
+    techStack: ["PyGame", "Python"],
   },
   {
     title: "Sprintify",
@@ -80,17 +95,8 @@ export const projectCards = [
     videoPath: null,
     images: [],
     techStack: ["Next.js", "Tailwind CSS", "Firebase"],
-  },
-  {
-    title: "Portfolio Website",
-    date: "2024",
-    imgPath: "/images/portfolio_thumb.png",
-    description: "A personal portfolio website showcasing projects and skills.",
-    githubLink: "https://github.com/username/portfolio",
-    videoPath: null, // No video, will use GIF
-    images: [],
-    techStack: ["ReactJS", "GSAP", "Three.js"],
-  },
+  }
+  
 ];
 
 gsap.registerPlugin(ScrollTrigger);
