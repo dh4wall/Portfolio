@@ -1,54 +1,39 @@
 import { useState, useEffect } from "react";
 
-
-
-
 const navLinks = [
-  {
-    name: "Work",
-    link: "#work",
-  },
-  {
-    name: "Projects",
-    link: "#experience",
-  },
-  {
-    name: "Skills",
-    link: "#skills",
-  },
-  {
-    name: "Education",
-    link: "#testimonials",
-  },
+  { name: "Work",        link: "#work" },
+  { name: "Projects",   link: "#projects" },
+  { name: "Experience", link: "#experience" },
+  { name: "Education",  link: "#education" },
+  { name: "Skills",     link: "#skills" },
+  { name: "Contact",    link: "#contact" },
 ];
 
 const Navbar = () => {
-  // track if the user has scrolled down the page
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // create an event listener for when the user scrolls
-    const handleScroll = () => {
-      // check if the user has scrolled down at least 10px
-      // if so, set the state to true
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
-    };
-
-    // add the event listener to the window
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
-
-    // cleanup the event listener when the component is unmounted
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close menu on link click
+  const handleNavClick = (link) => {
+    setMenuOpen(false);
+    document.querySelector(link)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}>
       <div className="inner">
+        {/* Logo */}
         <a href="#hero" className="logo">
           Dhawal Shinde
         </a>
 
+        {/* Desktop nav */}
         <nav className="desktop">
           <ul>
             {navLinks.map(({ link, name }) => (
@@ -62,14 +47,55 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        <a href="#contact" className="contact-btn group">
+        {/* Desktop CTA */}
+        <a
+          href="/docs/C2K231271_DhawalShinde_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-btn group"
+        >
           <div className="inner">
-            <span>Contact me</span>
+            <span>Resume</span>
           </div>
         </a>
+
+        {/* Mobile hamburger */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`hamburger-line ${menuOpen ? "open" : ""}`} />
+          <span className={`hamburger-line mid ${menuOpen ? "open" : ""}`} />
+          <span className={`hamburger-line ${menuOpen ? "open" : ""}`} />
+        </button>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          {navLinks.map(({ link, name }) => (
+            <button
+              key={name}
+              className="mobile-menu-link"
+              onClick={() => handleNavClick(link)}
+            >
+              {name}
+            </button>
+          ))}
+          <a
+            href="/docs/C2K231271_DhawalShinde_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-menu-resume"
+            onClick={() => setMenuOpen(false)}
+          >
+            Download Resume
+          </a>
+        </div>
+      )}
     </header>
   );
-}
+};
 
 export default Navbar;
